@@ -16,8 +16,23 @@
   var idbable = idbable.default;
   (async function() {
     var db = new idbable('db1', 'table1');
-    const rs = await db.setItem('item1', 'itemval1').catch(e => console.info(e))
-    console.info(db, rs);
+    // window.db = db
+    const setter = await db.setItem('item1', 'itemval1')
+    const setter2 = await db.setItem('item2', 'itemval2')
+    
+    const getter = await db.getItem('item2')
+    // @TODO del me
+    console.info(getter)
+
+    await db.delItem('item2')
+    const keys = await db.keys()
+    const values = await db.values()
+    // @TODO del me
+    console.info(keys, values)
+    // setTimeout(async () => {
+    //   const dp = await db.dropDb()
+    //   console.info(dp)
+    // }, 2000)
   })();
 </script>
 </html>

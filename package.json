@@ -1,7 +1,7 @@
 {
   "name": "idbable",
   "version": "0.0.1",
-  "description": "The indexDB wrapper for browser which supports IE",
+  "description": "The promisify indexDB wrapper for browser which supports IE",
   "config": {
     "libName": "idbable"
   },
