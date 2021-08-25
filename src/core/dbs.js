@@ -17,12 +17,11 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 import { openDb, deleteDb } from './idb.polyfill.js'
+import assert from './assert.js'
 
 class dbs {
   constructor (dbName, tableName) {
-    if (!('indexedDB' in window)) {
-      throw new Error('Fatal error: the browser does not support indexedDb')
-    }
+    assert(('indexedDB' in window), 'Fatal error: the browser does not support indexedDb')
     this.dbName = dbName
     this.tableName = tableName
     Object.defineProperty(this, 'db', {

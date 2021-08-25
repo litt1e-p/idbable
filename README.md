@@ -1,7 +1,7 @@
 # idbable
 
-[![npm](https://img.shields.io/npm/v/idable?color=green)]((https://www.npmjs.com/package/idable))
-[![npm](https://img.shields.io/npm/dm/idable.svg)](https://www.npmjs.com/package/idable)
+[![npm](https://img.shields.io/npm/v/idbable?color=green)]((https://www.npmjs.com/package/idbable))
+[![npm](https://img.shields.io/npm/dm/idbable.svg)](https://www.npmjs.com/package/idbable)
 
 The promisify indexDB wrapper for browser which supports IE
 
