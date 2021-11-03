@@ -239,11 +239,8 @@ proxyMethods(DB, '_db', IDBDatabase, [
   'close'
 ]);
 
-// Add cursor iterators
-// TODO: remove this once browsers do the right thing with promises
 ['openCursor', 'openKeyCursor'].forEach(function(funcName) {
   [ObjectStore, Index].forEach(function(Constructor) {
-    // Don't create iterateKeyCursor if openKeyCursor doesn't exist.
     if (!(funcName in Constructor.prototype)) return;
 
     Constructor.prototype[funcName.replace('open', 'iterate')] = function() {
@@ -258,13 +255,11 @@ proxyMethods(DB, '_db', IDBDatabase, [
   });
 });
 
-// polyfill getAll
 [Index, ObjectStore].forEach(function(Constructor) {
   if (Constructor.prototype.getAll) return;
   Constructor.prototype.getAll = function(query, count) {
     var instance = this;
     var items = [];
-
     return new Promise(function(resolve) {
       instance.iterateCursor(query, function(cursor) {
         if (!cursor) {
@@ -272,7 +267,6 @@ proxyMethods(DB, '_db', IDBDatabase, [
           return;
         }
         items.push(cursor.value);
-
         if (count !== undefined && items.length == count) {
           resolve(items);
           return;
@@ -283,13 +277,11 @@ proxyMethods(DB, '_db', IDBDatabase, [
   };
 });
 
-// polyfill getAllKeys
 [Index, ObjectStore].forEach(function(Constructor) {
   if (Constructor.prototype.getAllKeys) return;
   Constructor.prototype.getAllKeys = function(query, count) {
     var instance = this;
     var items = [];
-
     return new Promise(function(resolve) {
       instance.iterateCursor(query, function(cursor) {
         if (!cursor) {
@@ -297,7 +289,6 @@ proxyMethods(DB, '_db', IDBDatabase, [
           return;
         }
         items.push(cursor.key);
-
         if (count !== undefined && items.length == count) {
           resolve(items);
           return;
@@ -311,7 +302,6 @@ proxyMethods(DB, '_db', IDBDatabase, [
 export function openDb(name, version, upgradeCallback) {
   var p = promisifyRequestCall(indexedDB, 'open', [name, version]);
   var request = p.request;
-
   if (request) {
     request.onupgradeneeded = function(event) {
       if (upgradeCallback) {
@@ -319,7 +309,6 @@ export function openDb(name, version, upgradeCallback) {
       }
     };
   }
-
   return p.then(function(db) {
     return new DB(db);
   });

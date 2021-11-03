@@ -20,13 +20,6 @@
   "main": "dist/idbable.umd.js",
   "module": "dist/idbable.esm.js",
   "unpkg": "dist/idbable.min.js",
-  "scripts": {
-    "build": "rm -rf dist/ && npm run build:browser && npm run build:es && npm run build:umd",
-    "build:browser": "rollup --config build/rollup.config.browser.js",
-    "build:es": "rollup --config build/rollup.config.es.js",
-    "build:umd": "rollup --config build/rollup.config.umd.js",
-    "dev": "cross-env NODE_ENV=development rollup --config build/rollup.config.es.js --watch"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/litt1e-p/idbable.git"
@@ -45,17 +38,5 @@
     "idb": "3.0.2",
     "core-js": "^3.16.2",
     "regenerator-runtime": "^0.13.9"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "cross-env": "^7.0.3",
-    "rollup": "^2.56.3",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "@rollup/plugin-replace": "^3.0.0",
-    "rollup-plugin-terser": "^7.0.2"
   }
 }
